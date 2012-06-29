@@ -52,12 +52,6 @@
     
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     [self.webView loadRequest:req];
-    
-    self.loadStatusCheckTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
-                                                                 target:self
-                                                               selector:@selector(checkLoadStatus)
-                                                               userInfo:nil
-                                                                repeats:YES];
 }
 
 -(void) checkLoadStatus
@@ -82,6 +76,12 @@
     {
         [self.webView stringByEvaluatingJavaScriptFromString:@"window.__myLoad5t4tu5__ = 'notloaded'; window.onload=function() {window.__myLoad5t4tu5__ = 'loaded';}"];
         injectedPageLoadedJS = YES;
+
+    	self.loadStatusCheckTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
+                                                                 target:self
+                                                               selector:@selector(checkLoadStatus)
+                                                               userInfo:nil
+                                                                repeats:YES];
     }
 }
 
